@@ -1,7 +1,6 @@
 import { Button } from "../ui/button"
 import { Card, CardContent, CardFooter } from "../ui/card"
 function AdminProductTile({product,setOpenCreateProductDialog,setCurrentEditProductId,setFormProductData,isEditMode,handleDelete}){
-   const [a,setA]=useState(a)
    function handleEditbutton(event){
       event.preventDefault()
       setCurrentEditProductId(product._id)
