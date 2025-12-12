@@ -1,0 +1,14 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+//   "tailwindCSS.experimental.classRegex": []
+"tailwindCSS.experimental.classRegex": [
+  ["tw`([^`]*)", 1],
+  ["clsx\\(([^)]*)\\)", 1]
+]
+}
