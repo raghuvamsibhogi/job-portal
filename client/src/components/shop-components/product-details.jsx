@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, getCart } from "@/store/shop-slice/cart-slice";
-import { setProductDetails } from "@/store/shop-slice/product-slice";
+import { getShopProductDetailstrunk, setProductDetails } from "@/store/shop-slice/product-slice";
 import Rating from "../common/star-rating";
 import { Label } from "../ui/label";
 import { useEffect, useState } from "react";
@@ -41,6 +41,7 @@ function ProductDialog({open,setOpen,product_details}){
                     setRatingValue(0)
                     setReviewMessage('')
                     dispatch(getProductReview(product_details._id))
+                    dispatch(getShopProductDetailstrunk(product_details._id))
                 }
                 else{
                      toast({
