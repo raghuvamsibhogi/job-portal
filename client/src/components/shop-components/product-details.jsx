@@ -14,6 +14,9 @@ import Rating from "../common/star-rating";
 import { Label } from "../ui/label";
 import { useEffect, useState } from "react";
 import { addReview, getProductReview } from "@/store/shop-slice/review-slice";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 
 
 
@@ -27,6 +30,7 @@ function ProductDialog({open,setOpen,product_details}){
       const {productReviewList} = useSelector(state=>state.productReviewSlice)
       const [reviewMessage,setReviewMessage]=useState('')
       const [ratingValue,setRatingValue] = useState(0)
+      dayjs.extend(relativeTime);
     function handleRatingChange(star){
         console.log(star,'rating')
         setRatingValue(star)
@@ -48,6 +52,7 @@ function ProductDialog({open,setOpen,product_details}){
                        title : data.payload.message,
                        variant:'destructive'
                     })
+                    dispatch(getProductReview(product_details._id))
                 }
             }
         )
@@ -161,6 +166,7 @@ console.log(productReviewList)
                          <div className="grid gap-1">
                             <div className="flex items-center gap-2">
                                    <h3 className="font-bold">{reviewItem.userName}</h3>
+                                   <span>{dayjs(reviewItem.createdAt).fromNow()}</span> 
                             </div>
                             <div className="flex items-center gap-0.5">
                                 <Rating ratingValue={reviewItem.reviewValue}/>
@@ -171,6 +177,7 @@ console.log(productReviewList)
                                     <StarIcon className="w-5 h-5 fill-primary"></StarIcon> */}
                             </div>
                             <p>{reviewItem.reviewMessage}</p>
+                           
                          </div>
                     </div>
 
@@ -189,7 +196,7 @@ console.log(productReviewList)
                       <Rating ratingValue={ratingValue} handleRatingChange={handleRatingChange}/>
                     </div>
                     <Input name="revieMessage" onChange={(event)=>setReviewMessage(event.target.value)} placeholder="write a review"/>
-                    <Button onClick={handleReviewSubmit} disabled={reviewMessage.trim()===''}>Submit</Button>
+                    <Button onClick={handleReviewSubmit} disabled={reviewMessage.trim()==='' || ratingValue==0}>Submit</Button>
                 </div>
                </div>
             </div>
