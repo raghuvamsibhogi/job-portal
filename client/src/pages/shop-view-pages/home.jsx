@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"
 import ProductDialog from "@/components/shop-components/product-details"
 import { addCart,getCart } from "@/store/shop-slice/cart-slice"
 import { useToast } from "@/hooks/use-toast"
+import { getFeatureImages } from "@/store/common-slice"
 
 
  const categoriesWithIcon = [
@@ -29,12 +30,13 @@ import { useToast } from "@/hooks/use-toast"
           {id:"roadstart",label:"RoadStar",icon:Heater}
      ]    
 function ShopHome(){
-    const slides = [bannerOne,bannerTwo,bannerThree]
+    // const slides = [bannerOne,bannerTwo,bannerThree]
     const[currentSlide,setCurrentSlide]=useState(0)
     const dispatch = useDispatch()
     const {productList,productDetails} = useSelector(state=>state.shopProductsSlice)
     const {user} = useSelector(state=>state.auth)
     const {cartItems}  = useSelector(state=>state.shopCartslice)
+    const {imageList} = useSelector(state=>state.imageUploaderSlice)
     const navigate = useNavigate()
     const [openDetailsDialog,setopenDetailsDialog] = useState(false)
     const {toast}   = useToast()
@@ -94,33 +96,34 @@ function ShopHome(){
      useEffect(
         ()=>{
             const timer= setInterval(() => {
-                setCurrentSlide(prevSlide=>((prevSlide+1 + slides.length)%slides.length))
+                setCurrentSlide(prevSlide=>((prevSlide+1 + imageList.length)%imageList.length))
             }, 5000)
             return ()=>clearInterval(timer)
         },
     [] )
     useEffect(()=>{
             dispatch(getShopProducttrunk({filterParams:{},sortParams:'price-lowtohigh'}))
+            dispatch(getFeatureImages())
     },[dispatch]
     )
     return(
         <div className="flex flex-col min-h-screen">
             <div className="relative w-full h-[600px] overflow-hidden ">
                {
-                slides.map((slide,index)=>
+                imageList.map((imageItem,index)=>
                 <img
-                src={slide}
+                src={imageItem.image}
                 key={index}
                 className={`${(index === currentSlide)?'opacity-100':'opacity-0'} absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 `}
                 />)
                }
                <Button variant="outline" size="icon" className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"  onClick
-               ={()=>setCurrentSlide(prevSlide=>((prevSlide-1 + slides.length)%slides.length))} >
+               ={()=>setCurrentSlide(prevSlide=>((prevSlide-1 + imageList.length)%imageList.length))} >
                 <ChevronLeftIcon className="w-h h-4"/>
                </Button>
                <Button variant="outline" size="icon" className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80" 
                onClick
-               ={()=>setCurrentSlide(prevSlide=>((prevSlide+1 + slides.length)%slides.length))}>
+               ={()=>setCurrentSlide(prevSlide=>((prevSlide+1 + imageList.length)%imageList.length))}>
                 <ChevronRightIcon className="w-h h-4"/>
                </Button>
             </div>

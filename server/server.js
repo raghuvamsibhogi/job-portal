@@ -11,6 +11,7 @@ import ordersRouter from "./routes/shop/orders.js"
 import adminOrdersRouter from "./routes/admin/orders.js"
 import SearchRouter from "./routes/shop/search.js"
 import shopReviewRouter from "./routes/shop/review.js"
+import featureRouter from "./routes/common/feature.js"
 const app = express()
 connectedToDb()
 const PORT = process.env.PORT||5000;
@@ -39,6 +40,7 @@ app.use("/api/shop/address",addressRouter)
 app.use("/api/shop/orders",ordersRouter)
 app.use("/api/shop/search",SearchRouter)
 app.use("/api/shop/review",shopReviewRouter)
+app.use("/api/common",featureRouter)
 
 app.listen(PORT,()=>
     console.log(`server is running on port ${PORT}`))

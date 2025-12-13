@@ -31,8 +31,11 @@ const getOrders = async(req,res)=>{
         }
       },
   { $unwind: "$user" },
+  { $sort: { createdAt: -1 } },
   { $skip: skip },
-  { $limit: 2 },
+  { $limit: 2 }
+  
+
 ]);
 const totalRecords = await Orders.countDocuments()
 console.log(orders)

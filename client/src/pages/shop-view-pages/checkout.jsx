@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { createNewOrder } from "@/store/shop-slice/orders-slice"
 import { useToast } from "@/hooks/use-toast"
 import { Skeleton } from "@/components/ui/skeleton"
+import { Spinner } from "@/components/ui/spinner"
 function ShopCheckOut(){
     const {cartItems} = useSelector(state=>state.shopCartslice)
     const totalCartAmount = cartItems.items && cartItems.items.length>0?
@@ -14,7 +15,7 @@ function ShopCheckOut(){
     const {user} = useSelector(state=>state.auth) 
     const [currentSelectedAddress,setCurrentSelectedAddress] = useState(null)
     const [isPaymentStart,setIsPaymentStart] = useState(false)
-    const {approvalUrl,orderId} = useSelector(state=>state.shoppingOrderSlice)
+    const {approvalUrl,orderId,isLoading} = useSelector(state=>state.shoppingOrderSlice)
     const dispatch = useDispatch()
     const {toast} = useToast()
 
@@ -100,7 +101,7 @@ function ShopCheckOut(){
                     </div>
                 </div>
                 <div className="mt-4 w-full">
-                    <Button onClick={()=>handleIntialPaypal()} disabled={isPaymentStart} className="w-full">{isPaymentStart?'Processing Payment':'Check Out With Paypal'}</Button>
+                    <Button onClick={()=>handleIntialPaypal()} disabled={isPaymentStart || isLoading } className="w-full">{(isPaymentStart || isLoading)?<Spinner/>:null}{isPaymentStart?'Processing Payment':'Check Out With Paypal'}</Button>
                 </div>
                  </div>
 
