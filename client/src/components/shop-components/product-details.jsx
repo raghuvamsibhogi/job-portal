@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { addReview, getProductReview } from "@/store/shop-slice/review-slice";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { getFeatureImages } from "@/store/common-slice";
 
 
 
@@ -96,6 +97,7 @@ function ProductDialog({open,setOpen,product_details}){
         dispatch(setProductDetails())
         setRatingValue(0)
         setReviewMessage('')
+        // dispatch(getFeatureImages())
     }
     useEffect(()=>{
       if(product_details!==null) dispatch(getProductReview(product_details._id))

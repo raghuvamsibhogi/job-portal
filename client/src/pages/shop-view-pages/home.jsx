@@ -96,16 +96,19 @@ function ShopHome(){
      useEffect(
         ()=>{
             const timer= setInterval(() => {
-                setCurrentSlide(prevSlide=>((prevSlide+1 + imageList.length)%imageList.length))
+                console.log(imageList.length,'imageLength')
+                setCurrentSlide(prevSlide=>((prevSlide+1 + imageList.length)%(imageList.length)))
+                console.log(currentSlide,'currentSlide')
             }, 5000)
             return ()=>clearInterval(timer)
         },
-    [] )
+    [imageList] )
     useEffect(()=>{
             dispatch(getShopProducttrunk({filterParams:{},sortParams:'price-lowtohigh'}))
             dispatch(getFeatureImages())
     },[dispatch]
     )
+    console.log(imageList,'imageList')
     return(
         <div className="flex flex-col min-h-screen">
             <div className="relative w-full h-[600px] overflow-hidden ">
