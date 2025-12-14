@@ -1,4 +1,4 @@
-require('dotenv').config()
+import 'dotenv/config'
 import express from "express"
 import {connectedToDb} from "./models/database.js"
 import cors from "cors"
