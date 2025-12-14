@@ -5,23 +5,23 @@ const initialState = {
     isLoading: false
 }
 export const addAddress = createAsyncThunk('address/addAddress',async({userId,address,city,phone,pinCode,notes})=>{
-    const response = await axios.post('http://localhost:5000/api/shop/address/addaddress',{
+    const response = await axios.post(`{import.meta.env.VITE_API_URL}/api/shop/address/addaddress`,{
         userId,address,city,phone,pinCode,notes
     })
     return response.data
 })
 export const updateAddress = createAsyncThunk('cart/updateAddress',async({userId,address,city,phone,pinCode,notes,addressId})=>{
-    const response = await axios.put(`http://localhost:5000/api/shop/address/updateAddress/${userId}/${addressId}`,{
+    const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/shop/address/updateAddress/${userId}/${addressId}`,{
         userId,address,city,phone,pinCode,notes
     })
     return response.data
 })
 export const deleteAddress = createAsyncThunk('cart/deleteAddress',async({userId,addressId})=>{
-    const response = await axios.delete(`http://localhost:5000/api/shop/address/deleteAddress/${userId}/${addressId}`)
+    const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/shop/address/deleteAddress/${userId}/${addressId}`)
     return response.data
 })
 export const getAddress = createAsyncThunk('cart/getAddress',async(userId)=>{
-    const response = await axios.get(`http://localhost:5000/api/shop/address/getAddress/${userId}`)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/address/getAddress/${userId}`)
     return response.data
 })
 const shoppingAddressSlice = createSlice({

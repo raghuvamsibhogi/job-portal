@@ -57,12 +57,13 @@ function AdminViewOrders(){
        const {user} = useSelector(state=>state.auth)
       const [page,setCurrentPage] = useState(1)
      const[totalPages,setTotalPages]=useState(0)
+     let limit = 5
        useEffect(()=>{
-         dispatch(getOrders({page,limit:2})).then(data=>{
+         dispatch(getOrders({page,limit:limit})).then(data=>{
             console.log(data,'order')
             if(data.payload.success){
                 console.log(totalRecords)
-                setTotalPages(Math.round(data.payload.totalRecords/2))
+                setTotalPages(Math.round(data.payload.totalRecords/limit))
                 console.log(totalPages)
             }
          })

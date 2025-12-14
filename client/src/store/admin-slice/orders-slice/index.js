@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const getOrders = createAsyncThunk('./order/getOrders',async({page,limit})=>{
-    const response = await axios.get("http://localhost:5000/api/admin/orders/getOrders",
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/orders/getOrders`,
       { params: { page,limit } } 
     ) 
     return response.data
@@ -18,7 +18,7 @@ export const getOrders = createAsyncThunk('./order/getOrders',async({page,limit}
 
 )
 export const getOrderDetails = createAsyncThunk('./order/getOrderDetails',async(orderId)=>{
-    const response = await axios.get("http://localhost:5000/api/admin/orders/getOrderDetails",
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/orders/getOrderDetails`,
       { params: { orderId } } 
     ) 
     return response.data
@@ -26,7 +26,7 @@ export const getOrderDetails = createAsyncThunk('./order/getOrderDetails',async(
 
 )
 export const updateOrderStatus = createAsyncThunk('./order/updateOrderStatus',async({orderId,orderStatus} )=>{
-    const response = await axios.post("http://localhost:5000/api/admin/orders/updateOrderStatus",
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/admin/orders/updateOrderStatus`,
       {orderId,orderStatus} 
     ) 
     return response.data

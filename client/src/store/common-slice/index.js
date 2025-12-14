@@ -5,13 +5,13 @@ const initialState = {
     imageList : []
 }
 export const saveImage = createAsyncThunk('/common/saveImage',async(imageUrl)=>{
-    const response = await axios.post('http://localhost:5000/api/common/saveImage',{
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/common/saveImage`,{
         image:imageUrl
     })
     return response.data
 })
 export const getFeatureImages = createAsyncThunk('/common/getFeaturImage',async()=>{
-      const response = await axios.get('http://localhost:5000/api/common/getImages'
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/common/getImages`
     )
     return response.data
 })

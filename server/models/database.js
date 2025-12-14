@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 const connectedToDb=async()=>{
     try{
-    mongoose.connect("mongodb+srv://raghuvamsibhogi2025:raghuvamsibhogi2025@cluster0.kbpckie.mongodb.net/")
+    mongoose.connect(process.env.MONGO_URL)
     .then(()=>{
         console.log("db Connected Successfully")
     })

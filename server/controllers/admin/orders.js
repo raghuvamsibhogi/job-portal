@@ -4,6 +4,7 @@ const getOrders = async(req,res)=>{
   try{
     let {page,limit} = req.query 
     let skip = (page-1)*limit
+    limit = parseInt(limit)
     console.log(skip)
   //  const orders = await Orders.find()
     const orders = await Orders.aggregate([
@@ -33,7 +34,7 @@ const getOrders = async(req,res)=>{
   { $unwind: "$user" },
   { $sort: { createdAt: -1 } },
   { $skip: skip },
-  { $limit: 2 }
+  { $limit: limit }
   
 
 ]);

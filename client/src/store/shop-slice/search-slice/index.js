@@ -6,7 +6,7 @@ const initialState = {
 }
  export const searchProduct = createAsyncThunk('/shop/searchProduct',async(keyword)=>
     {
-     const response = await axios.get('http://localhost:5000/api/shop/search/searchProduct',{params:{keyword}})
+     const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/search/searchProduct`,{params:{keyword}})
      return response.data
  })
  const searchProductSlice = createSlice({
