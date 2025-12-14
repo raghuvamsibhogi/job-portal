@@ -7,11 +7,12 @@ import { shopHeaderMenuItems } from "@/config"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Avatar } from "@radix-ui/react-avatar"
 import { AvatarFallback } from "../ui/avatar"
-import { logOutAction } from "@/store/auth-slice"
+import { logOutAction, resetTokenAndCredentials } from "@/store/auth-slice"
 import { useEffect, useState } from "react"
 import UserCartWrapper from "./cart-wrapper"
 import { getCart } from "@/store/shop-slice/cart-slice"
 import { Label } from "../ui/label"
+import { useToast } from "@/hooks/use-toast"
 function MenuItmems(){
      const navigate = useNavigate()
     function handleNavigate(item,section){
@@ -52,9 +53,16 @@ function MenuItmems(){
 function HeaderRightContent({user}){
     const navigate =useNavigate()
     const dispatch = useDispatch()
+    const {toast}  = useToast()
     function handleLogOut(){
         console.log('hey')
-        dispatch(logOutAction())
+        // dispatch(logOutAction())
+        toast({
+                            title:'Logout Successfully'
+                            })
+                dispatch(resetTokenAndCredentials())
+                sessionStorage.clear()
+                navigate('/auth/login')  
     }
     const [openCartSheet,setOpenCartSheet] = useState(false)
     const {cartItems}=useSelector((state)=>state.shopCartslice)

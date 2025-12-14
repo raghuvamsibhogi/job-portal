@@ -31,7 +31,8 @@ function App() {
    const {user,isAuthenticated,isloading}=useSelector(state=>state.auth)
    const dispatch = useDispatch()
    useEffect(()=>{
-        dispatch(checkAuthAction())
+    const token = JSON.parse(sessionStorage.getItem('token'))
+        dispatch(checkAuthAction(token))
    },[dispatch])
    if(isloading){
     // return <div>loading .....</div>

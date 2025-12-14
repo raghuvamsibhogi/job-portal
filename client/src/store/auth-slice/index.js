@@ -5,7 +5,8 @@ import { LogIn } from "lucide-react";
 const initialState = {
     isAuthenticated:false,
     isloading:true,
-    user:null
+    user:null,
+    token:null
 
 }
 export const registerAction = createAsyncThunk('/auth/register',
@@ -31,11 +32,23 @@ export const logOutAction = createAsyncThunk('/auth/logout',
     return response.data
   }
 )
+// export const checkAuthAction = createAsyncThunk('/auth/checkAuth',
+//   async(formData)=>{
+//     const response = await axios.get(`${import.meta.env.VITE_API_URL}api/auth/check-auth`,{
+//       withCredentials:true,
+//       headers:{
+//         'Cache-Control':"no-store,no-cache,must-revalidate,proxy-revalidate"
+//       }
+//     }) 
+//     return response.data
+//   }
+// )
 export const checkAuthAction = createAsyncThunk('/auth/checkAuth',
-  async(formData)=>{
+  async(token)=>{
     const response = await axios.get(`${import.meta.env.VITE_API_URL}api/auth/check-auth`,{
-      withCredentials:true,
+      
       headers:{
+        Authorization:`Bearer ${token}`,
         'Cache-Control':"no-store,no-cache,must-revalidate,proxy-revalidate"
       }
     }) 
@@ -48,6 +61,11 @@ const authSlice = createSlice({
   reducers:{
     setUser: (state,action)=>{
 
+    },
+    resetTokenAndCredentials:(state,action)=>{
+      state.isAuthenticated = false,
+      state.token=null,
+      state.user = null
     }
  },
   extraReducers:(builder)=>{
@@ -69,10 +87,13 @@ const authSlice = createSlice({
         state.isloading=false
         state.user=(action.payload.success==1)?action.payload.user:null;
         state.isAuthenticated=(action.payload.success==1)?true:false 
+        state.token = action.payload.token
+        sessionStorage.setItem('token',JSON.stringify(action.payload.token))
       }).addCase(loginAction.rejected,(state,action)=>{
         state.isloading=false
         state.user=null;
         state.isAuthenticated=false 
+        state.token = null
       })
        builder.addCase(checkAuthAction.pending,(state)=>{
         state.isloading=true
@@ -100,5 +121,5 @@ const authSlice = createSlice({
       })
     }
 })
-export const {setUser} = authSlice.actions
+export const {setUser,resetTokenAndCredentials} = authSlice.actions
 export default  authSlice.reducer;

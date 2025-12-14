@@ -1,23 +1,31 @@
 import { AlignJustify, LogOut } from "lucide-react"
 import { Button } from "../ui/button"
 import { useDispatch } from "react-redux"
-import { logOutAction } from "@/store/auth-slice"
+import { logOutAction, resetTokenAndCredentials } from "@/store/auth-slice"
 import { useToast } from "@/hooks/use-toast"
+import { useNavigate } from "react-router-dom"
 
 
 function AdminHeader({setOpen}){
     const dispatch = useDispatch()
     const {toast} = useToast()
+    const navigate = useNavigate()
     function handleLogout(e){
-        dispatch(logOutAction()).then(
-            (data)=>{
-                if(data.success){
-                  toast({
-                    title:data.message
+        // dispatch(logOutAction()).then(
+        //     (data)=>{
+        //         if(data.success){
+        //           toast({
+        //             title:data.message
+        //             })
+        //         }
+        //     }
+        // )
+        toast({
+                    title:'Logout Successfully'
                     })
-                }
-            }
-        )
+        dispatch(resetTokenAndCredentials())
+        sessionStorage.clear()
+        navigate('/auth/login')            
     }
     return(
         <header onClick={()=>setOpen(true)} className="flex items-center justify-between px-8 py-3 bg-background border-b">
