@@ -10,7 +10,7 @@ const initialState = {
 }
 export const registerAction = createAsyncThunk('/auth/register',
   async(formData)=>{
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`,formData,{
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/auth/register`,formData,{
       withCredentials:true
     }) 
     return response.data
@@ -18,7 +18,7 @@ export const registerAction = createAsyncThunk('/auth/register',
 )
 export const loginAction = createAsyncThunk('/auth/login',
   async(formData)=>{
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`,formData,{
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/auth/login`,formData,{
       withCredentials:true
     }) 
     return response.data
@@ -26,14 +26,14 @@ export const loginAction = createAsyncThunk('/auth/login',
 )
 export const logOutAction = createAsyncThunk('/auth/logout',
   async(formData)=>{
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`,{},{
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/auth/logout`,{},{
       withCredentials:true}) 
     return response.data
   }
 )
 export const checkAuthAction = createAsyncThunk('/auth/checkAuth',
   async(formData)=>{
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/check-auth`,{
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}api/auth/check-auth`,{
       withCredentials:true,
       headers:{
         'Cache-Control':"no-store,no-cache,must-revalidate,proxy-revalidate"

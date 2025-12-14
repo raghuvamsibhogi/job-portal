@@ -6,11 +6,11 @@ const initialState = {
     productReviewList:[]
 }
 export const addReview = createAsyncThunk('./review/addreview',async({userId,userName,reviewMessage,reviewValue,productId})=>{
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shop/review/addReview`,{userId,userName,reviewMessage,reviewValue,productId})
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/shop/review/addReview`,{userId,userName,reviewMessage,reviewValue,productId})
     return response.data
 })
 export const getProductReview = createAsyncThunk('./review/getProductReview',async(productId)=>{
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/review/getProductReviews`,{params:{productId}})
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}api/shop/review/getProductReviews`,{params:{productId}})
     return response.data
 })
 const productReviewSlice = createSlice({

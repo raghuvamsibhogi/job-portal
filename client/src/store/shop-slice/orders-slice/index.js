@@ -8,14 +8,14 @@ const initialState = {
     orderDetails:[]
 }
 export const createNewOrder = createAsyncThunk('./order/createNewOrder',async(orderData)=>{
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shop/orders/create`,orderData) 
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/shop/orders/create`,orderData) 
     console.log(response)
     return response.data
 }
 
 )
 export const capturePayment = createAsyncThunk('./order/capturePayment',async({paymentId,payerId,orderId})=>{
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shop/orders/capture`,{
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/shop/orders/capture`,{
       paymentId,payerId,orderId
     }) 
     return response.data
@@ -23,7 +23,7 @@ export const capturePayment = createAsyncThunk('./order/capturePayment',async({p
 
 )
 export const getOrders = createAsyncThunk('./order/getOrders',async(userId)=>{
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/orders/getOrders`,
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}api/shop/orders/getOrders`,
       { params: { userId } } 
     ) 
     return response.data
@@ -32,7 +32,7 @@ export const getOrders = createAsyncThunk('./order/getOrders',async(userId)=>{
 )
 export const getOrderDetails = createAsyncThunk('./order/getOrderDetails',async(orderId)=>{
   console.log(orderId)
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/orders/getOrderDetails`,
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}api/shop/orders/getOrderDetails`,
       { params: { orderId } } 
     ) 
     return response.data
