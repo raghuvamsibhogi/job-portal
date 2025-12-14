@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import User from "../../models/users.js"
+import { json } from "express"
 const register = async(req,res)=>{
     const {userName,email,password} = req.body
   try{ 
@@ -93,15 +94,26 @@ const login = async(req,res)=>{
                 const token = jwt.sign({
                     id:userDetails._id,email:userDetails.email,role:userDetails.role,userName:userDetails.userName
                 },process.env.JWT_SECRET_KEY,{expiresIn:'100m'})
-                res.cookie('token',token,{httpOnly:true,secure:true}).json({
-                    success:true,
+                // res.cookie('token',token,{httpOnly:true,secure:true}).json({
+                    // success:true,
+                    // message:"Login Successfully",
+                    // user:{
+                    //     email:userDetails.email,
+                    //     role:userDetails.role,
+                    //     id:userDetails._id,
+                    //     userName : userDetails.userName
+                    // }
+                // })
+                res.status(200)/json({
+                      success:true,
                     message:"Login Successfully",
                     user:{
                         email:userDetails.email,
                         role:userDetails.role,
                         id:userDetails._id,
                         userName : userDetails.userName
-                    }
+                    },
+                    token:token
                 })
             }  
            
