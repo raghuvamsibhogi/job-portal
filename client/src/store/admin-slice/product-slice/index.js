@@ -6,7 +6,7 @@ const initialState = {
 }
 export const addProducttrunk = createAsyncThunk("/admin/products/addProduct",
     async (formData)=>{
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}api/admin/products/add-product`
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/admin/products/add-product`
             ,formData
             ,
             {
@@ -20,7 +20,7 @@ export const addProducttrunk = createAsyncThunk("/admin/products/addProduct",
 
 export const editProducttrunk = createAsyncThunk("/admin/products/updateProduct",
     async ({id,formData})=>{
-        const response = await axios.put(`${import.meta.env.VITE_API_URL}api/admin/products/update-product/${id}`
+        const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/products/update-product/${id}`
             ,formData
             ,
             {
@@ -35,7 +35,7 @@ export const editProducttrunk = createAsyncThunk("/admin/products/updateProduct"
 
 export const deleteProducttrunk = createAsyncThunk("/admin/products/deleteProduct",
     async ({id})=>{
-        const response = await axios.delete(`${import.meta.env.VITE_API_URL}api/admin/products/delete-product/${id}`
+        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin/products/delete-product/${id}`
            
         )
         return response.data
@@ -43,7 +43,7 @@ export const deleteProducttrunk = createAsyncThunk("/admin/products/deleteProduc
 )
 export const getProducttrunk = createAsyncThunk("/admin/products/getProducts",
     async ()=>{
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/admin/products/get-products`
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/products/get-products`
         )
         return response.data
     }

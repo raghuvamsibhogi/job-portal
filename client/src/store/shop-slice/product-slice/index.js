@@ -16,7 +16,7 @@ export const getShopProducttrunk = createAsyncThunk("/shop/products/getProducts"
             limit:limit
         })
         console.log(query)
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/shop/products/fetchProducts?${query}`
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/products/fetchProducts?${query}`
         )
         return response.data
     }
@@ -24,7 +24,7 @@ export const getShopProducttrunk = createAsyncThunk("/shop/products/getProducts"
 export const getShopProductDetailstrunk = createAsyncThunk("/shop/products/getProductsDetails",
     async (id)=>{
      
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/shop/products/getProductsDetails/${id}`
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/shop/products/getProductsDetails/${id}`
         )
         return response.data
     }
