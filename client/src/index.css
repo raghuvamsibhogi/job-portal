@@ -33,3 +33,43 @@ input:-webkit-autofill:active {
   box-shadow: 0 0 0px 1000px white inset !important;
   -webkit-text-fill-color: black !important;
 }
+.richh-text {
+  text-align: left;
+  line-height: 1.7;
+  color: #222;
+}
+
+/* Headings */
+.richh-text h2,
+.richh-text h3 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Paragraph */
+.richh-text p {
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+/* Ordered lists (numbers) */
+.richh-text ol {
+  list-style-type: decimal;
+  list-style-position: outside; /* proper alignment */
+  padding-left: 22px;
+  margin: 10px 0 16px 0;
+}
+
+/* List items */
+.richh-text li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Remove clumsy extra spacing */
+.richh-text ol li::marker {
+  font-weight: 500;
+}
